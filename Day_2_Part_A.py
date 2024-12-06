@@ -37,21 +37,17 @@ with open('Day_2_Input.txt', 'r') as file:
 
     for line in file:
         report = list(map(int, line.split(' ')))
-        print(f"the current line is:  {report}")
         
         # if any nums are the same then look no further, move to next line
         if not numsAreUnique(report):
-            print("   and the nums are NOT UNIQUE. Moving to next")
             continue
         
         # if the list is neither Asc or Desc, then dont need to look at, move to next line
         if not isAscend(report) and not isDescend(report):
-            print("   and the input is not a gradual inc/decr. moving to next")
             continue
 
         if validDiff(report):
             total += 1
-            print(f"the diff between nums is valid, and total is now: {total}")
 
 # The correct output for my input is:   421
 print(total)
