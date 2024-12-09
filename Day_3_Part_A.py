@@ -19,4 +19,5 @@ for m in matches:
     result = mul(int(nums[0]), int(nums[1]))
     total += result
 
+# Correct answer for my input is:    175015740  
 print(total)
