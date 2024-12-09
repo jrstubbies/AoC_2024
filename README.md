@@ -11,3 +11,5 @@ Day 3 Part A:
 
 
 Day 3 Part B:
+    Using same input. The input contains words "do()" and "don't()". Now need to calculate ONLY the 'mul(x,y)'
+    that come AFTER a 'do()' and before a 'don't()'.
