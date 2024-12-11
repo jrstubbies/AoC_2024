@@ -1,4 +1,3 @@
-# MY CODE
 
 def checkLeftRight(lines, linelength, i, j):
     total = 0
