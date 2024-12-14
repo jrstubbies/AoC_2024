@@ -1,27 +1,33 @@
-import re
+from itertools import pairwise
 
 
 input_dict = {}
-part_2_lines = []
-
-# Read the contents of the file
+rules = []
+# Read the contents of the file. First and second part of input is separated by double '\n' char
 with open('Day_5_Input.txt', 'r') as file:
-    lines = file.readlines()
+    rules_input, updates = file.read().strip().split("\n\n")
 
-# Go over the lines and add keys/values to dict for the first part of input. Store second part input as lists
-for line in lines:
-    # Deal with the first part of inputs which is in form "X|Y"
-    if (re.match(r'[\d]+\|[\d]+', line)):
-        x, y = line.split('|')
-        
-        # if the 'x' value is NOT already a key then add it with its associated 'y' value (done as a list)
-        if x not in input_dict:
-            input_dict[x] = [int(y.strip())]
+    for line in rules_input.split("\n"):
+        x, y = line.split("|")
+        rules.append((int(x), int(y)))
+    
+    # Store the values in the second part of the input as a list of ints for each line
+    updates = [list(map(int, line.split(","))) for line in updates.split("\n")]
 
-        # if the 'x' value IS in the dict already, then need to add the 'y' value to its list of values.
-        else:
-            input_dict[x].append(int(y.strip()))
+# CONVERT THIS INTO A FUNCTION -> IS CALCULATING SOMETHING IT SHOULDNT ????
+order = {}
+total = 0
+test = 0
+for u in updates:
+    for i, num in enumerate(u):
+        order[num] = i
+    
+    for x, y in rules:
+        if (x in order and y in order) and (not order[x] < order[y]):
+            test += 1
+            # take the sum of all MIDDLE numbers for each valid line
+            total += u[len(u) // 2] 
 
-# Debug the dictionary to check all items added correctly
-for x, y in input_dict.items():
-    print(f'X is: {x}    and Y is: {y}')
+
+print(total)
+# 10813    == TOO HIGH
